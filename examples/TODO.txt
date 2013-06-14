@@ -1,0 +1,12 @@
+
+-> Implement the neural controller
+
+-> Servocontroller:
+  * Implement the getpos command!
+
+Bugs found:
+
+-> Test-sinoscontroller-1 and 2 have to be updated to work in Openrave rev1749
+-> FIX: Sinoscontroller: If the simulation is stoped with the viewer... then
+   it cannot be restarted agait! Bad if you want to take a video... UPDATE!
+   It sometimes works...

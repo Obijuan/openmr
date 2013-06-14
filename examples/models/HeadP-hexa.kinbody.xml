@@ -1,0 +1,18 @@
+<!-- Head of the Y1 module
+     It is located in the head of the snake
+     The reference frame is located in the shaft
+-->
+
+<Kinbody name="khead">
+   <Body name="Head" type="dynamic">
+      <Mass type="mimicgeom">
+       <total>0.05</total>
+     </Mass>
+     <Geom type="box">
+       <Extents>0.026 0.018 0.026</Extents>
+       <diffuseColor>1.0 1.0 0.0</diffuseColor>
+       <translation>0 0.018 0</translation>
+     </Geom>
+    </Body>
+</Kinbody>
+

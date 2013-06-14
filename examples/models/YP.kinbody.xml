@@ -1,0 +1,28 @@
+<!-- Yaw-Pitch segment
+     It is located in the middle of the snake
+     The main trunk is form by the union of PY and YP segments
+-->
+
+
+<Kinbody name="kYP">
+  <Body name="Seg" type="dynamic">
+      <translation>-0.007 0 0</translation>
+      <mass type="sphere">
+        <total>0.05</total>
+        <radius>0.036</radius>
+      </mass>
+      <Geom type="trimesh">
+        <Render>Y1-head.iv 0.001</Render>
+        <data>Y1-head.iv 0.001</data>
+        <rotationaxis>0 1 0 -90</rotationaxis>
+        <translation>0.007 0.018 -0.007</translation>
+      </Geom>
+      <Geom type="trimesh">
+        <Render>Y1-body.iv 0.001</Render>
+        <data>Y1-body.iv 0.001</data>
+        <translation>0.007 0.054 -0.007</translation>
+      </Geom>
+   </Body>
+</Kinbody>
+
+

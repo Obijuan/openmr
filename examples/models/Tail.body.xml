@@ -1,0 +1,15 @@
+
+<Kinbody name="ktail">
+  <Body name="Tail" type="dynamic">
+      <mass type="sphere">
+        <total>0.025</total>
+        <radius>0.018</radius>
+      </mass>
+      <Geom type="trimesh">
+        <Render>Y1-body.iv 0.001</Render>
+        <data>Y1-body.iv 0.001</data>
+        <translation>0 -0.054 0</translation>
+      </Geom>
+    </Body>
+</Kinbody>
+  

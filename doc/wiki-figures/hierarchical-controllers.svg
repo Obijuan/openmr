@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="hierarchical-controllers.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Mend"
+       style="overflow:visible;">
+      <path
+         id="path3262"
+         style="font-size:12.0;fill-rule:evenodd;stroke-width:0.62500000;stroke-linejoin:round;"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(0.6) rotate(180) translate(0,0)" />
+    </marker>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="411.51502"
+     inkscape:cy="805.29941"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1127"
+     inkscape:window-x="0"
+     inkscape:window-y="24" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect2440"
+       width="526.28949"
+       height="312.13712"
+       x="114.65232"
+       y="37.66396"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="opacity:1;fill:#ff9955;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4531"
+       width="224.28572"
+       height="32.142857"
+       x="180.71429"
+       y="204.50504"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#0000ff;fill-rule:evenodd;stroke:#0000ff;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 142.70628,319.49539 L 216.85772,279.29457"
+       id="path2385"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       id="path2391"
+       d="M 378.5298,319.43316 L 460.94904,301.49966"
+       style="fill:none;fill-rule:evenodd;stroke:#0000ff;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#0000ff;fill-rule:evenodd;stroke:#0000ff;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 216.81831,279.43724 L 378.41739,319.61759"
+       id="path2395"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:0.42430708;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path3209"
+       sodipodi:cx="48.57143"
+       sodipodi:cy="25.219324"
+       sodipodi:rx="3.9285715"
+       sodipodi:ry="3.9285715"
+       d="M 52.500002,25.219324 A 3.9285715,3.9285715 0 1 1 44.642859,25.219324 A 3.9285715,3.9285715 0 1 1 52.500002,25.219324 z"
+       transform="matrix(2.3567838,0,0,2.3567838,103.44039,221.99291)"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:1,2;stroke-dashoffset:0"
+       d="M 115.1798,260.77516 L 640.67804,260.77516"
+       id="path3213"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans;-inkscape-font-specification:Sans Bold"
+       x="497.12799"
+       y="306.64789"
+       id="text3222"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3224"
+         x="497.12799"
+         y="306.64789">Modular robot</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
+       x="246.847"
+       y="328.37234"
+       id="text3226"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3228"
+         x="246.847"
+         y="328.37234">Joints</tspan></text>
+    <g
+       id="g3218"
+       style="stroke:#999999;fill:#999999"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         style="fill:#999999;fill-opacity:1;fill-rule:evenodd;stroke:#999999;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 222.875,292.59375 L 222.03125,293.15625 L 240.65625,321.21875 L 241.5,320.65625 L 222.875,292.59375 z"
+         id="path3230" />
+      <path
+         d="M 223.33626,298.562 L 221.72316,291.76612 L 227.35466,295.89797 C 225.58974,295.8115 223.9701,296.89248 223.33626,298.562 z"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.62500000000000000;stroke-linejoin:round;stroke:#999999;fill:#999999"
+         id="path3224" />
+    </g>
+    <g
+       id="g3226"
+       style="fill:#999999;stroke:#999999"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         style="fill:#999999;fill-opacity:1;fill-rule:evenodd;stroke:#999999;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 366.125,322.1875 L 290.6875,325.4375 L 290.75,326.4375 L 366.15625,323.1875 L 366.125,322.1875 z"
+         id="path4010" />
+      <path
+         d="M 360.81357,320.49807 L 367.46657,322.62497 L 361.02061,325.31489 C 362.00582,323.84799 361.91618,321.90281 360.81357,320.49807 z"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.62500000000000000;stroke-linejoin:round;fill:#999999;stroke:#999999"
+         id="path3233" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans;-inkscape-font-specification:Sans Bold"
+       x="231.18462"
+       y="224.69072"
+       id="text4527"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan4529"
+         x="231.18462"
+         y="224.69072">Servocontroller</tspan></text>
+    <path
+       sodipodi:type="arc"
+       style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:0.42430708;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path4538"
+       sodipodi:cx="48.57143"
+       sodipodi:cy="25.219324"
+       sodipodi:rx="3.9285715"
+       sodipodi:ry="3.9285715"
+       d="M 52.500002,25.219324 A 3.9285715,3.9285715 0 1 1 44.642859,25.219324 A 3.9285715,3.9285715 0 1 1 52.500002,25.219324 z"
+       transform="matrix(2.3567838,0,0,2.3567838,265.30529,258.38357)"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow2Mend);stroke-opacity:1"
+       d="M 214.64286,269.86217 L 214.64286,240.62843"
+       id="path4540"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow2Mend);stroke-opacity:1"
+       d="M 222.14286,239.75209 L 222.14286,268.98583"
+       id="path5057"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow2Mend);stroke-opacity:1"
+       d="M 375,305.57647 L 375,241.6679"
+       id="path5059"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow2Mend);stroke-opacity:1"
+       d="M 382.5,239.75211 L 382.5,303.66067"
+       id="path5061"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans;-inkscape-font-specification:Sans Bold"
+       x="496.68478"
+       y="225.53906"
+       id="text5063"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan5065"
+         x="496.68478"
+         y="225.53906">Level 0</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1, 2;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 115.68488,184.50865 L 641.18312,184.50865"
+       id="path5067"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <g
+       id="g5586"
+       transform="matrix(3.8213328,0,0,3.8213328,-851.86353,-433.83098)"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 293.46875,149.41963 L 293.46875,164.4375 L 294.46875,164.4375 L 294.46875,149.41963 L 293.46875,149.41963 z"
+         id="path5069"
+         sodipodi:nodetypes="ccccc" />
+      <path
+         d="M 296.37463,159.20694 L 293.964,165.76246 L 291.55337,159.20694 C 292.9766,160.25424 294.92384,160.2482 296.37463,159.20694 z"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path5592" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
+       x="334.50201"
+       y="156.05153"
+       id="text5594"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan5596"
+         x="334.50201"
+         y="156.05153">Servo's reference</tspan><tspan
+         sodipodi:role="line"
+         x="334.50201"
+         y="171.05153"
+         id="tspan2408"> positions</tspan></text>
+    <rect
+       style="opacity:1;fill:#ff9955;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect2410"
+       width="224.28572"
+       height="32.142857"
+       x="180.71429"
+       y="98.439018"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans;-inkscape-font-specification:Sans Bold"
+       x="217.04248"
+       y="118.6247"
+       id="text2412"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan2414"
+         x="217.04248"
+         y="118.6247">Level 1 controllers</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans;-inkscape-font-specification:Sans Bold"
+       x="496.68478"
+       y="148.76747"
+       id="text2416"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan2418"
+         x="496.68478"
+         y="148.76747">Level 1</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1, 2;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 115.68488,79.957862 L 641.18312,79.957862"
+       id="path2420"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <g
+       id="g2422"
+       transform="matrix(3.8213328,0,0,3.8213328,-851.86353,-541.41223)"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 293.46875,154.83871 L 293.46875,164.4375 L 294.46875,164.4375 L 294.46875,154.83871 L 293.46875,154.83871 z"
+         id="path2424"
+         sodipodi:nodetypes="ccccc" />
+      <path
+         d="M 296.37463,159.20694 L 293.964,165.76246 L 291.55337,159.20694 C 292.9766,160.25424 294.92384,160.2482 296.37463,159.20694 z"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path2426" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
+       x="354.8656"
+       y="65.112556"
+       id="text2428"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         x="354.8656"
+         y="65.112556"
+         id="tspan2432">High level commands</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans;-inkscape-font-specification:Sans Bold"
+       x="497.27472"
+       y="66.440025"
+       id="text2436"
+       inkscape:export-filename="/home/juan/desarrollo/openmr/doc/wiki-figures/rect2440.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan2438"
+         x="497.27472"
+         y="66.440025">Higher levels</tspan></text>
+  </g>
+</svg>

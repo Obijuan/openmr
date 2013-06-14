@@ -1,0 +1,462 @@
+<Robot name="snake">
+  <KinBody name="snake">
+
+  <Kinbody file="TailP.kinbody.xml"/>
+
+  <!-- Translation of segment i is (0,(i-1)*L,0), where L is the 
+         module lenght. For Y1 modules, L=0.072                   -->
+  <Kinbody prefix="1" file="PY.kinbody.xml"/>
+  <Kinbody prefix="2" file="YP.kinbody.xml">
+      <translation>0 0.072 0</translation>
+  </Kinbody>
+
+  <Kinbody prefix="3" file="PY.kinbody.xml">
+      <translation>0 0.144 0</translation>
+  </Kinbody>
+  <Kinbody prefix="4" file="YP.kinbody.xml">
+      <translation>0 0.216 0</translation>
+  </Kinbody>
+
+  <Kinbody prefix="5" file="PY.kinbody.xml">
+      <translation>0 0.288 0</translation>
+  </Kinbody>
+  <Kinbody prefix="6" file="YP.kinbody.xml">
+      <translation>0 0.360 0</translation>
+  </Kinbody>
+
+  <Kinbody prefix="7" file="PY.kinbody.xml">
+      <translation>0 0.432 0</translation>
+  </Kinbody>
+  <Kinbody prefix="8" file="YP.kinbody.xml">
+      <translation>0 0.504 0</translation>
+  </Kinbody>
+
+  <Kinbody prefix="9" file="PY.kinbody.xml">
+      <translation>0 0.576 0</translation>
+  </Kinbody>
+  <Kinbody prefix="10" file="YP.kinbody.xml">
+      <translation>0 0.648 0</translation>
+  </Kinbody>
+
+  <Kinbody prefix="11" file="PY.kinbody.xml">
+      <translation>0 0.720 0</translation>
+  </Kinbody>
+  <Kinbody prefix="12" file="YP.kinbody.xml">
+      <translation>0 0.792 0</translation>
+  </Kinbody>
+
+  <Kinbody prefix="13" file="PY.kinbody.xml">
+      <translation>0 0.864 0</translation>
+  </Kinbody>
+  <Kinbody prefix="14" file="YP.kinbody.xml">
+      <translation>0 0.936 0</translation>
+  </Kinbody>
+
+  <Kinbody prefix="15" file="PY.kinbody.xml">
+      <translation>0 1.008 0</translation>
+  </Kinbody>
+  <Kinbody prefix="16" file="YP.kinbody.xml">
+      <translation>0 1.080 0</translation>
+  </Kinbody>
+
+  <Kinbody prefix="17" file="PY.kinbody.xml">
+      <translation>0 1.152 0</translation>
+  </Kinbody>
+  <Kinbody prefix="18" file="YP.kinbody.xml">
+      <translation>0 1.224 0</translation>
+  </Kinbody>
+
+  <Kinbody prefix="19" file="PY.kinbody.xml">
+      <translation>0 1.296 0</translation>
+  </Kinbody>
+  <Kinbody prefix="20" file="YP.kinbody.xml">
+      <translation>0 1.368 0</translation>
+  </Kinbody>
+
+  <Kinbody prefix="21" file="PY.kinbody.xml">
+      <translation>0 1.440 0</translation>
+  </Kinbody>
+  <Kinbody prefix="22" file="YP.kinbody.xml">
+      <translation>0 1.512 0</translation>
+  </Kinbody> 
+
+  <Kinbody prefix="23" file="PY.kinbody.xml">
+      <translation>0 1.584 0</translation>
+  </Kinbody>
+  <Kinbody prefix="24" file="YP.kinbody.xml">
+      <translation>0 1.656 0</translation>
+  </Kinbody>
+
+  <Kinbody prefix="25" file="PY.kinbody.xml">
+      <translation>0 1.728 0</translation>
+  </Kinbody>
+  <Kinbody prefix="26" file="YP.kinbody.xml">
+      <translation>0 1.800 0</translation>
+  </Kinbody>
+
+  <Kinbody prefix="27" file="PY.kinbody.xml">
+      <translation>0 1.872 0</translation>
+  </Kinbody>
+  <Kinbody prefix="28" file="YP.kinbody.xml">
+      <translation>0 1.944 0</translation>
+  </Kinbody>
+
+  <Kinbody prefix="29" file="PY.kinbody.xml">
+      <translation>0 2.016 0</translation>
+  </Kinbody>
+  <Kinbody prefix="30" file="YP.kinbody.xml">
+      <translation>0 2.088 0</translation>
+  </Kinbody>
+
+
+  <Kinbody file="HeadP.kinbody.xml">
+      <translation>0 2.160 0</translation>
+  </Kinbody>
+
+   <Joint type="hinge" name="J1">
+      <Body>Tail</Body>
+      <Body>1Seg</Body>
+      <offsetfrom>1Seg</offsetfrom>
+      <axis>1 0 0</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J2">
+      <Body>1Seg</Body>
+      <Body>2Seg</Body>
+      <offsetfrom>2Seg</offsetfrom>
+      <axis>0 0 1</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+   
+    <Joint type="hinge" name="J3">
+      <Body>2Seg</Body>
+      <Body>3Seg</Body>
+      <offsetfrom>3Seg</offsetfrom>
+      <axis>1 0 0</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J4">
+      <Body>3Seg</Body>
+      <Body>4Seg</Body>
+      <offsetfrom>4Seg</offsetfrom>
+      <axis>0 0 1</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J5">
+      <Body>4Seg</Body>
+      <Body>5Seg</Body>
+      <offsetfrom>5Seg</offsetfrom>
+      <axis>1 0 0</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J6">
+      <Body>5Seg</Body>
+      <Body>6Seg</Body>
+      <offsetfrom>6Seg</offsetfrom>
+      <axis>0 0 1</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J7">
+      <Body>6Seg</Body>
+      <Body>7Seg</Body>
+      <offsetfrom>7Seg</offsetfrom>
+      <axis>1 0 0</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J8">
+      <Body>7Seg</Body>
+      <Body>8Seg</Body>
+      <offsetfrom>8Seg</offsetfrom>
+      <axis>0 0 1</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J9">
+      <Body>8Seg</Body>
+      <Body>9Seg</Body>
+      <offsetfrom>9Seg</offsetfrom>
+      <axis>1 0 0</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J10">
+      <Body>9Seg</Body>
+      <Body>10Seg</Body>
+      <offsetfrom>10Seg</offsetfrom>
+      <axis>0 0 1</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J11">
+      <Body>10Seg</Body>
+      <Body>11Seg</Body>
+      <offsetfrom>11Seg</offsetfrom>
+      <axis>1 0 0</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J12">
+      <Body>11Seg</Body>
+      <Body>12Seg</Body>
+      <offsetfrom>12Seg</offsetfrom>
+      <axis>0 0 1</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J13">
+      <Body>12Seg</Body>
+      <Body>13Seg</Body>
+      <offsetfrom>13Seg</offsetfrom>
+      <axis>1 0 0</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J14">
+      <Body>13Seg</Body>
+      <Body>14Seg</Body>
+      <offsetfrom>14Seg</offsetfrom>
+      <axis>0 0 1</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J15">
+      <Body>14Seg</Body>
+      <Body>15Seg</Body>
+      <offsetfrom>15Seg</offsetfrom>
+      <axis>1 0 0</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J16">
+      <Body>15Seg</Body>
+      <Body>16Seg</Body>
+      <offsetfrom>16Seg</offsetfrom>
+      <axis>0 0 1</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J17">
+      <Body>16Seg</Body>
+      <Body>17Seg</Body>
+      <offsetfrom>17Seg</offsetfrom>
+      <axis>1 0 0</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J18">
+      <Body>17Seg</Body>
+      <Body>18Seg</Body>
+      <offsetfrom>18Seg</offsetfrom>
+      <axis>0 0 1</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J19">
+      <Body>18Seg</Body>
+      <Body>19Seg</Body>
+      <offsetfrom>19Seg</offsetfrom>
+      <axis>1 0 0</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J20">
+      <Body>19Seg</Body>
+      <Body>20Seg</Body>
+      <offsetfrom>20Seg</offsetfrom>
+      <axis>0 0 1</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J21">
+      <Body>20Seg</Body>
+      <Body>21Seg</Body>
+      <offsetfrom>21Seg</offsetfrom>
+      <axis>1 0 0</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J22">
+      <Body>21Seg</Body>
+      <Body>22Seg</Body>
+      <offsetfrom>22Seg</offsetfrom>
+      <axis>0 0 1</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J23">
+      <Body>22Seg</Body>
+      <Body>23Seg</Body>
+      <offsetfrom>23Seg</offsetfrom>
+      <axis>1 0 0</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J24">
+      <Body>23Seg</Body>
+      <Body>24Seg</Body>
+      <offsetfrom>24Seg</offsetfrom>
+      <axis>0 0 1</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J25">
+      <Body>24Seg</Body>
+      <Body>25Seg</Body>
+      <offsetfrom>25Seg</offsetfrom>
+      <axis>1 0 0</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J26">
+      <Body>25Seg</Body>
+      <Body>26Seg</Body>
+      <offsetfrom>26Seg</offsetfrom>
+      <axis>0 0 1</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J27">
+      <Body>26Seg</Body>
+      <Body>27Seg</Body>
+      <offsetfrom>27Seg</offsetfrom>
+      <axis>1 0 0</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J28">
+      <Body>27Seg</Body>
+      <Body>28Seg</Body>
+      <offsetfrom>28Seg</offsetfrom>
+      <axis>0 0 1</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J29">
+      <Body>28Seg</Body>
+      <Body>29Seg</Body>
+      <offsetfrom>29Seg</offsetfrom>
+      <axis>1 0 0</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J30">
+      <Body>29Seg</Body>
+      <Body>30Seg</Body>
+      <offsetfrom>30Seg</offsetfrom>
+      <axis>0 0 1</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+
+    <Joint type="hinge" name="J31">
+      <Body>30Seg</Body>
+      <Body>Head</Body>
+      <offsetfrom>Head</offsetfrom>
+      <axis>1 0 0</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+  </KinBody>
+</Robot>
+
+
+

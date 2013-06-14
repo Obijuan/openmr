@@ -1,0 +1,19 @@
+<!-- Body of the Y1 module
+     It is the piece located in the Tail of the snakes
+     The reference frame is located in the shaft
+-->
+
+<Kinbody name="ktail">
+  <Body name="Tail" type="dynamic">
+    <mass type="sphere">
+      <total>0.025</total>
+      <radius>0.018</radius>
+    </mass>
+    <Geom type="trimesh">
+      <Render>Y1-body.iv 0.001</Render>
+      <data>Y1-body.iv 0.001</data>
+      <translation>0 -0.018 -0.007</translation>
+    </Geom>
+  </Body>
+</Kinbody>
+  

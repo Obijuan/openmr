@@ -1,0 +1,37 @@
+<Robot name="Minicube-I">
+  <KinBody name="kMinicube-I">
+
+    <!-- The tail of the robot -->
+    <Kinbody file="TailP-hexa.kinbody.xml"/>
+
+    <!-- segment in the middle -->
+    <Kinbody prefix="1" file="PP-hexa.kinbody.xml"/>
+
+    <!-- The head of the robot -->
+    <Kinbody file="HeadP-hexa.kinbody.xml">
+      <translation>0 0.072 0</translation>
+    </Kinbody>
+
+    <!-- Joints -->
+    <Joint type="hinge" name="J1">
+      <Body>Tail</Body>
+      <Body>1Seg</Body>
+      <offsetfrom>1Seg</offsetfrom>
+      <axis>1 0 0</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <limitsdeg>-90 90</limitsdeg>
+    </Joint>
+
+    <Joint type="hinge" name="J2">
+      <Body>1Seg</Body>
+      <Body>Head</Body>
+      <offsetfrom>Head</offsetfrom>
+      <axis>1 0 0</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <limitsdeg>-90 90</limitsdeg>
+    </Joint>
+
+  </KinBody>
+</Robot>

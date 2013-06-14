@@ -1,0 +1,40 @@
+<!-- Robot composed of two y1 modules: one pitch and one yaw
+     It is an example of the union between the different parts
+     The robot cannot displace
+-->
+
+<Robot name="PY1">
+  <KinBody name="kPY1">
+
+  <Kinbody file="TailP.kinbody.xml"/>
+
+  <Kinbody prefix="1" file="PY.kinbody.xml"/>
+
+  <Kinbody file="HeadY.kinbody.xml">
+      <translation>0 0.072 0</translation>
+  </Kinbody>
+
+   <Joint type="hinge" name="J1">
+      <Body>Tail</Body>
+      <Body>1Seg</Body>
+      <offsetfrom>1Seg</offsetfrom>
+      <axis>1 0 0</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+    <Joint type="hinge" name="J2">
+      <Body>1Seg</Body>
+      <Body>Head</Body>
+      <offsetfrom>Head</offsetfrom>
+      <axis>0 0 1</axis>
+      <maxtorque>0.4</maxtorque>
+      <maxvel>4.5</maxvel>
+      <lostop>-90</lostop>
+      <histop>90</histop>
+    </Joint>
+
+  </KinBody>
+</Robot>

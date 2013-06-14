@@ -1,0 +1,22 @@
+
+  <Kinbody>
+  <Body name="Seg" type="dynamic">
+      <mass type="sphere">
+        <total>0.05</total>
+        <radius>0.036</radius>
+      </mass>
+      <Geom type="trimesh">
+        <Render>Y1-head.iv 0.001</Render>
+        <data>Y1-head.iv 0.001</data>
+        <translation>0 -0.018 0</translation>
+      </Geom>
+      <Geom type="trimesh">
+        <Render>Y1-body.iv 0.001</Render>
+        <data>Y1-body.iv 0.001</data>
+        <rotationaxis>0 1 0 -90</rotationaxis>
+        <translation>0 0.018 0</translation>
+      </Geom>
+   </Body>
+  </Kinbody>
+
+

@@ -1,0 +1,35 @@
+<!-- Piece for building pitch snake robots
+     These pieces are connected forming a chain
+--> 
+
+<Kinbody name="kStar3middle">
+  <Body name="Mid" type="dynamic">
+      <mass type="sphere">
+        <total>0.075</total>
+        <radius>0.051</radius>
+      </mass>
+     
+      <Geom type="trimesh">
+        <Render>Y1-body.iv 0.001</Render>
+        <data>Y1-body.iv 0.001</data>
+        <translation>0 0.033 -0.007</translation>
+      </Geom> 
+      <Geom type="trimesh">
+        <Render>Y1-body.iv 0.001</Render>
+        <data>Y1-body.iv 0.001</data>
+        <rotationaxis>0 0 1 -120</rotationaxis>
+        
+        <translation>0.0286 -0.0165 -0.007</translation> 
+        <!-- 
+        <translation>0.0156 -0.009 0</translation>  -->
+      </Geom>
+      <Geom type="trimesh">
+        <Render>Y1-body.iv 0.001</Render>
+        <data>Y1-body.iv 0.001</data>
+        <rotationaxis>0 0 1 120</rotationaxis>
+        <translation>-0.0286 -0.0165 -0.007</translation> 
+      </Geom>
+  </Body>
+</Kinbody>
+
+

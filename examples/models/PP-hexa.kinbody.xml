@@ -1,0 +1,18 @@
+<!-- Piece for building pitch snake robots
+     These pieces are connected forming a chain
+--> 
+
+<Kinbody name="kPPseg">
+  <Body name="Seg" type="dynamic">
+      <Mass type="mimicgeom">
+       <total>0.05</total>
+     </Mass>
+     <Geom type="box">
+       <Extents>0.026 0.036 0.026</Extents>
+       <diffuseColor>1.0 1.0 0.0</diffuseColor>
+       <translation>0 0.036 0</translation>
+     </Geom>
+  </Body>
+</Kinbody>
+
+
