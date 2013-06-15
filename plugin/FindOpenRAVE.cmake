@@ -3,7 +3,7 @@
 #
 # OpenRAVE provides an environment for testing, developing, and deploying motion planning algorithms
 # in real-world robotics applications. The main focus is on simulation and analysis of kinematic and
-# geometric information related to motion planning. OpenRAVE’s stand-alone nature allows is to be easily
+# geometric information related to motion planning. OpenRAVE's stand-alone nature allows is to be easily
 # integrated into existing robotics systems. An important target application is industrial robotics automation.
 
 #==================================================================================
@@ -25,10 +25,10 @@ if(NOT OpenRAVE_DIR)
   if( WIN32 )
     # search in the registry
     set(_OpenRAVE_CONFIG_NAME "openrave-config.exe")
-    get_filename_component(OpenRAVE_VERSION_STRING "[HKEY_LOCAL_MACHINE\\SOFTWARE\\OpenRAVE;]" NAME)
+    get_filename_component(OpenRAVE_VERSION_STRING "[HKEY_LOCAL_MACHINE\SOFTWARE\OpenRAVE;]" NAME)
     message(STATUS "OpenRAVE ${OpenRAVE_VERSION_STRING} found in registry")
     if( OpenRAVE_VERSION_STRING )
-      get_filename_component(_OpenRAVE_PATH "[HKEY_LOCAL_MACHINE\\SOFTWARE\\OpenRAVE\\${OpenRAVE_VERSION_STRING};InstallRoot]" ABSOLUTE)
+      get_filename_component(_OpenRAVE_PATH "[HKEY_LOCAL_MACHINE\SOFTWARE\OpenRAVE\${OpenRAVE_VERSION_STRING};InstallRoot]" ABSOLUTE)
       set(_OpenRAVE_PATHS ${_OpenRAVE_PATHS} ${_OpenRAVE_PATH})
     endif( OpenRAVE_VERSION_STRING )
   else(WIN32)
