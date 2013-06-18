@@ -12,12 +12,14 @@ find_package(Boost ${OpenRAVE_Boost_VERSION} EXACT)
 include_directories(${OpenRAVE_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 link_directories(${OpenRAVE_LIBRARY_DIRS} ${Boost_LIBRARY_DIRS})
 
+# Look for the share directory
+EXEC_PROGRAM("openrave-config --share-dir" OUTPUT_VARIABLE OpenRAVE_SHARE_DIR)
+message(STATUS "Openrave Share directory: ${OpenRAVE_SHARE_DIR}")
+
 
 # OpenMR
 add_library(openMR SHARED openMR.cpp openMR.h servocontroller.h sinoscontroller.h)
 set_target_properties(openMR PROPERTIES COMPILE_FLAGS "${OpenRAVE_CXX_FLAGS}" LINK_FLAGS "${OpenRAVE_LINK_FLAGS}")
 target_link_libraries(openMR ${OpenRAVE_LIBRARIES})
-
-
-install(TARGETS openMR DESTINATION .)
+install(TARGETS openMR DESTINATION ${OpenRAVE_SHARE_DIR}/plugins/)
 
