@@ -18,8 +18,8 @@ message(STATUS "Openrave Share directory: ${OpenRAVE_SHARE_DIR}")
 
 
 # OpenMR
-add_library(openMR SHARED openMR.cpp openMR.h servocontroller.h sinoscontroller.h)
-set_target_properties(openMR PROPERTIES COMPILE_FLAGS "${OpenRAVE_CXX_FLAGS}" LINK_FLAGS "${OpenRAVE_LINK_FLAGS}")
-target_link_libraries(openMR ${OpenRAVE_LIBRARIES})
-install(TARGETS openMR DESTINATION ${OpenRAVE_SHARE_DIR}/plugins/)
+add_library(openmr SHARED openmr.cpp openmr.h servocontroller.h sinoscontroller.h)
+set_target_properties(openmr PROPERTIES COMPILE_FLAGS "${OpenRAVE_CXX_FLAGS}" LINK_FLAGS "${OpenRAVE_LINK_FLAGS}")
+target_link_libraries(openmr ${OpenRAVE_LIBRARIES})
+install(TARGETS openmr DESTINATION ${OpenRAVE_SHARE_DIR}/plugins/)
 

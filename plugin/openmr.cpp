@@ -1,4 +1,4 @@
-#include "openMR.h"
+#include "openmr.h"
 
 // called to create a new plugin
 InterfaceBasePtr CreateInterfaceValidated(InterfaceType type, const std::string& interfacename, std::istream& sinput, EnvironmentBasePtr penv)
