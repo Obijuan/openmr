@@ -1,9 +1,4 @@
-cmake_minimum_required (VERSION 2.6.0)
-project (openrave-modular-robots-examples)
-
-
 set(CMAKE_BUILD_TYPE RelWithDebInfo)
-find_package(OpenRAVE REQUIRED)
 
 # Make sure the openmr plugin is installed!
 # Get the openrave share directory
@@ -17,13 +12,7 @@ if (NOT OPENMR)
 endif()
 
 
-# Now check the compiler
-if( CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX )
-  add_definitions("-fno-strict-aliasing -Wall")
-endif( CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX )
-
-find_package(Boost ${OpenRAVE_Boost_VERSION} EXACT COMPONENTS iostreams python thread)
-
+# Include and link directories
 include_directories(${OpenRAVE_INCLUDE_DIRS} ${CMAKE_CURRENT_SOURCE_DIR} )
 if( Boost_INCLUDE_DIRS )
   include_directories(${Boost_INCLUDE_DIRS})
