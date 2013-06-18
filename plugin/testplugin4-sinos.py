@@ -21,6 +21,9 @@ try:
         env.StopSimulation()
         env.StartSimulation(timestep=0.001)
 
+    #-- Start recording
+    snake.GetController().SendCommand('record_on data-test4')
+
     #-- Set all amplitudes to 45
     A = [45 for j in snake.GetJoints()]
     snake.GetController().SendCommand('setamplitude '+' '.join(str(f) for f in A))
@@ -30,11 +33,14 @@ try:
     snake.GetController().SendCommand('setinitialphase '+' '.join(str(f) for f in phase0))
 
     #-- Set the period
-    snake.GetController().SendCommand('setperiod 1.5');
+    snake.GetController().SendCommand('setperiod 1.5')
 
-    snake.GetController().SendCommand('oscillation on');
+    snake.GetController().SendCommand('oscillation on')
     
-    while True:
-	t.sleep(1)
+    for i in range(1000):
+	t.sleep(0.01)
+
+    snake.GetController().SendCommand('record_off')
+    print "Ok until here"
 finally:
     RaveDestroy()

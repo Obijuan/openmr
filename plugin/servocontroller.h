@@ -259,13 +259,18 @@ public:
 
     bool RecordOn(std::ostream& os, std::istream& is)
     {
+	std::string fileName;
+
 	//-- Check current status:
 	if ( !recording )
 	{
 	    if ( is )
 	    {
-		outFilePath.erase();
-		is >> outFilePath;
+		fileName.erase();
+		is >> fileName;
+
+		outDataFilePath = fileName + ".txt";
+		outScriptFilePath = fileName + ".m";
 
 		//-- Resize the data vectors
 		for (size_t i=0; i<joints.size(); i++)
@@ -277,7 +282,7 @@ public:
 		//-- Setting the recording mode on
 		recording=true;
 
-		std::cout << "[servocontroller] RECORD on:" << outFilePath << "\n";
+		std::cout << "[servocontroller] RECORDING on: \"" << outDataFilePath << "\"\n";
 
 		return true;
 
@@ -300,21 +305,24 @@ public:
 
 	if (recording)
 	{
-	    //-- Open the file:
-	    ofstream outFile( outFilePath.c_str() );
+	    //-- Open the files:
+	    ofstream outDataFile( outDataFilePath.c_str() );
+	    ofstream outScriptFile( outScriptFilePath.c_str());
 
-	    if ( outFile.is_open() )
+	    //-- Restore state
+	    recording=false;
+
+	    if ( outDataFile.is_open() && outScriptFile.is_open() )
 	    {
 		//-- Write the information in the output file
-		generate_octave_file( outFile );
+		generate_octave_data( outDataFile );
+		generate_octave_file( outScriptFile, outDataFilePath  );
 
 		//-- Close the file
-		outFile.close();
+		outDataFile.close();
+		outScriptFile.close();
 
-		//-- Restore state
-		recording=false;
-
-		std::cout << "[servocontroller] RECORD off" << std::endl;
+		std::cout << "[servocontroller] RECORDING off" << std::endl;
 		std::cout << "[servocontroller] Max vel: " << joints[0]->GetMaxVel() << std::endl;
 		return true;
 	    }
@@ -322,9 +330,6 @@ public:
 	    {
 		//-- Error message
 		std::cerr << "[servocontroller] Error opening the output file." << std::endl;
-
-		//-- Restore state
-		recording=false;
 
 		std::cout << "[servocontroller] RECORD off" << std::endl;
 		std::cout << "[servocontroller] Max vel: " << joints[0]->GetMaxVel() << std::endl;
@@ -347,9 +352,131 @@ public:
 
 private:
 
-  void generate_octave_file( ofstream& outFile)
-  {
-	//-- TODO: meter mano a esto para que saque un archivo de DATOS con el formato de octave
+    void generate_octave_data(ofstream& outFile)
+    {
+	//-- Print file header:
+	outFile << "# Created by openMR plugin for openRAVE [ http://www.iearobotics.com/wiki/index.php?title=OpenMR:_Modular_Robots_plug-in_for_Openrave ]"
+		<< std::endl;
+
+	//-- Data matrix for the phi (actual angle of the joints):
+	//-- Each row is a servo, each column is a sample
+	outFile << "# name: phi" << std::endl;
+	outFile << "# type: matrix" << std::endl;
+	outFile << "# rows: " << phi_tvec.size() << std::endl;
+	outFile << "# columns: " << phi_tvec[0].size() << std::endl;
+
+	for (size_t i =0; i < phi_tvec.size(); i++)
+	{
+	    for ( size_t j = 0; j < phi_tvec[0].size() ; j ++)
+	    {
+		//-- Save the angles in degrees
+		outFile << phi_tvec[i][j]*180/PI << " ";
+	    }
+
+	    outFile << std::endl;
+	}
+
+	//-- Data matrix for ref (reference angle of the joints):
+	//-- Each row is a servo, each column is a sample
+	outFile << "# name: ref" << std::endl;
+	outFile << "# type: matrix" << std::endl;
+	outFile << "# rows: " << ref_tvec.size() << std::endl;
+	outFile << "# columns: " << ref_tvec[0].size() << std::endl;
+
+	for (size_t i =0; i < ref_tvec.size(); i++)
+	{
+	    for ( size_t j = 0; j < ref_tvec[0].size() ; j ++)
+	    {
+		//-- Save the angles in degrees
+		outFile << ref_tvec[i][j]*180/PI << " ";
+	    }
+
+	    outFile << std::endl;
+	}
+
+	//-- Data matrix for the simulation time
+	outFile << "# name: time" << std::endl;
+	outFile << "# type: matrix" << std::endl;
+	outFile << "# rows: 1" << std::endl;
+	outFile << "# columns: " << phi_tvec[0].size() << std::endl;
+
+	for( size_t i = 0; i < phi_tvec[0].size(); i++)
+	    outFile << i << " ";
+
+    }
+
+    void generate_octave_file( ofstream& outFile, std::string& dataFilePath )
+    {
+	//-- Print header
+	outFile << "# Created by openMR plugin for openRAVE [ http://www.iearobotics.com/wiki/index.php?title=OpenMR:_Modular_Robots_plug-in_for_Openrave ]"
+		<< std::endl << std::endl;
+
+	//-- Load data file
+	outFile << "# Load data file:" << std::endl;
+	outFile << "load('" << dataFilePath << "');" << std::endl << std::endl;
+
+
+	//-- Plotting things
+
+	//-- Plot the actual positions of the servos
+	outFile <<  "# Plot servo actual angles" << std::endl;
+	outFile << "plot(";
+	for (size_t i=0; i<phi_tvec.size(); i++)
+	{
+	    outFile << "time,phi(" << i+1 << ",:), '-'";
+
+	    //-- Add a ',' except for the last element
+	    if (i<phi_tvec.size()-1)
+		outFile << ",";
+	}
+	outFile << ");" << std::endl << endl;
+
+	//-- Plot the reference positions of the servos
+	outFile << "# Plot servo reference angles" << std::endl;
+	outFile << "hold on;";
+	outFile << "plot(";
+
+	for (size_t i=0; i<ref_tvec.size(); i++)
+	{
+	    outFile << "time,ref(" << i+1 << ",:),'-'";
+
+	    //-- Add a ',' except for the last element
+	    if (i<ref_tvec.size()-1)
+		outFile << ",";
+	}
+
+	outFile << ");" << endl << std::endl;
+
+
+	//-- Add the legends and other nice things
+	outFile << "# The following lines make the graph look nice" << std::endl;
+	outFile << "legend(";
+
+	for (size_t s=0; s<phi_tvec.size(); s++)
+	{
+	    outFile << "'Servo " << s+1 << "'";
+
+	    //-- Add a ',' except for the last element
+	    if (s<phi_tvec.size()-1)
+		outFile << ",";
+	}
+	outFile << ");" << std::endl;
+
+	//-- Formatting the graph
+	outFile << "grid on;" << endl;
+	outFile << "title('Servo angles')" << endl;
+	outFile << "xlabel('Simulation time')" << endl;
+	outFile << "ylabel('Angle (degrees)')" << endl;
+	outFile << "axis([0," << phi_tvec[0].size()-1 << ",-90, 90])" << endl;
+	outFile << "pause;" << endl;
+    }
+
+
+
+    //-- CAUTION!!
+    //-- This function is no longer used (deprecated)
+    void generate_octave_file( ofstream& outFile)
+    {
 
 	//-- Size of the sample population
 	size_t size = phi_tvec[0].size();
@@ -379,7 +506,7 @@ private:
 	    }
 
 	    outFile << "];" << endl;
-	 }
+	}
 
 	//-- Time
 	outFile << "t=[0:1:" << size-1 << "];" << endl;
@@ -447,7 +574,8 @@ protected:
     dReal KP;				//-- P controller KP constant
 
     //-- For recording...
-    std::string outFilePath;             //-- Path to the file for storing the servo positions
+    std::string outDataFilePath;         //-- Path to the file for storing the servo positions
+    std::string outScriptFilePath;	 //-- Path to the script for printing the beautiful graphs
     bool recording;			 //-- Recording mode state
     std::vector<tvector> phi_tvec;	 //-- Temporary storage for the servo's angles in time
     std::vector<tvector> ref_tvec;       //-- Temporary storage for the servo's reference positions in time

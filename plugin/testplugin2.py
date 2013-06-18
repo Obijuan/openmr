@@ -20,11 +20,11 @@ try:
     env.StartSimulation(timestep=0.001)
 
     with env:
-	snake.GetController().SendCommand( 'record_on data.m')
+	snake.GetController().SendCommand( 'record_on data-test2')
+	print "Getpos output: " + snake.GetController().SendCommand( 'Getpos')
         snake.GetController().SendCommand( 'setpos -30 45 -60')
-	t.sleep(1)
-	print snake.GetController().SendCommand( 'Getpos')
-	print snake.GetController().SendCommand( 'Getpos 1')
+	t.sleep(3)
+	print "Getpos1 1 output: " + snake.GetController().SendCommand( 'Getpos1 1')
 
 	snake.GetController().SendCommand( 'record_off')
 
