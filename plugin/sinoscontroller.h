@@ -34,6 +34,14 @@ public:
     {
 	__description = "Sinusoidal oscillator controller by Juan Gonzalez-Gomez, updated by David Estevez-Fernandez";
 
+	RegisterCommand( "Setamplitude", boost::bind(&SinosController::SetAmplitude, this, _1, _2), "Command for setting the aplitude");
+	RegisterCommand( "Setinitialphase", boost::bind(&SinosController::SetInitialPhase, this, _1, _2), "Command for setting the initial phase");
+	RegisterCommand( "Setoffset", boost::bind(&SinosController::SetOffset, this, _1, _2), "asdf");
+	RegisterCommand( "Setperiod", boost::bind(&SinosController::SetPeriod, this, _1, _2), "asdf");
+	RegisterCommand( "Oscillation", boost::bind(&SinosController::SetOscillation, this, _1, _2), "asdf");
+	RegisterCommand( "Record_on" , boost::bind(&SinosController::RecordOn, this, _1, _2), "asdf");
+	RegisterCommand( "Record_off", boost::bind(&SinosController::RecordOff, this, _1, _2), "asdf");
+
 	_penv = penv;
     }
 
@@ -50,10 +58,10 @@ public:
 	_pservocontroller->Init( _probot, _dofindices, _nControlTransformation);
 
 	//-- Resize local vectors
-	_ref_pos.resize(	  _probot->GetDOF() );
-	_amplitude.resize( _probot->GetDOF() );
-	_phase0.resize(	  _probot->GetDOF() );
-	_offset.resize(	  _probot->GetDOF() );
+	_ref_pos.resize(    _probot->GetDOF() );
+	_amplitude.resize(  _probot->GetDOF() );
+	_phase0.resize(	    _probot->GetDOF() );
+	_offset.resize(	    _probot->GetDOF() );
 
 	std::cout << "[sinoscontroller] INIT" << std::endl;
 
@@ -110,8 +118,89 @@ public:
 	}
     }
 
+    bool SetAmplitude( std::ostream& os, std::istream& is)
+    {
+	for(size_t i = 0; i < _amplitude.size(); ++i)
+	{
+	    is >> _amplitude[i];
 
+	    if( !is )
+		return false;
+	}
+	SetRefPos();
+	return true;
+    }
 
+    bool SetInitialPhase( std::ostream& os, std::istream& is)
+    {
+	for(size_t i = 0; i < _phase0.size(); ++i)
+	{
+	    is >> _phase0[i];
+
+	    if( !is )
+		return false;
+	}
+	SetRefPos();
+	return true;
+    }
+
+    bool SetOffset( std::ostream& os, std::istream& is)
+    {
+	for(size_t i = 0; i < _offset.size(); ++i)
+	{
+	    is >> _offset[i];
+
+	    if( !is )
+		return false;
+	}
+	SetRefPos();
+	return true;
+    }
+
+    bool SetPeriod( std::ostream& os, std::istream& is)
+    {
+	is >> _period;
+	_samplingPeriod= _period/_N;
+	SetRefPos();
+	return true;
+    }
+
+    bool SetOscillation( std::ostream& os, std::istream& is)
+    {
+	std::string mode;
+	is >> mode;
+
+	if (mode=="on")
+	    _oscillating=true;
+	else
+	    _oscillating=false;
+
+	return true;
+    }
+
+    bool RecordOn( std::ostream& os, std::istream& is)
+    {
+	string file;
+	stringstream os2, is2;
+
+	is >> file;
+
+	is2 << "record_on " << file << " ";
+	_pservocontroller->SendCommand(os2,is2);
+
+	return true;
+    }
+
+    bool RecordOff( std::ostream& os, std::istream& is)
+    {
+	stringstream os2, is2;
+
+	is2 << "record_off ";
+	_pservocontroller->SendCommand(os2,is2);
+
+	return true;
+    }
+/*
     virtual bool SendCommand(std::ostream& os, std::istream& is)
     {
 	string cmd;
@@ -190,7 +279,7 @@ public:
 	}
 	return true;
     }
-
+*/
     //-- Other functions:
     virtual const std::vector<int>& GetControlDOFIndices() const { return _dofindices; }
     virtual int IsControlTransformation() const { return _nControlTransformation; }
