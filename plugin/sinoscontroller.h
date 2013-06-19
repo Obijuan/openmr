@@ -34,28 +34,28 @@ public:
     {
 	__description = "Sinusoidal oscillator controller by Juan Gonzalez-Gomez, updated by David Estevez-Fernandez";
 
-	this->env = penv;
+	_penv = penv;
     }
 
     virtual ~SinosController() {}
 
     virtual bool Init(RobotBasePtr robot, const std::vector<int>& dofindices, int nControlTransformation)
     {
-	this->robot = robot;
-	this->dofIndices = dofindices;
-	this->nControlTransformation = nControlTransformation;
+	_probot = robot;
+	_dofindices = dofindices;
+	_nControlTransformation = nControlTransformation;
 
 	//-- Initialization of the servocontroller
-	servocontroller = RaveCreateController(env,"servocontroller");
-	servocontroller->Init( robot, dofindices, nControlTransformation);
+	_pservocontroller = RaveCreateController(_penv,"servocontroller");
+	_pservocontroller->Init( _probot, _dofindices, _nControlTransformation);
 
 	//-- Resize local vectors
-	ref_pos.resize(	  robot->GetDOF() );
-	amplitude.resize( robot->GetDOF() );
-	phase0.resize(	  robot->GetDOF() );
-	offset.resize(	  robot->GetDOF() );
+	_ref_pos.resize(	  _probot->GetDOF() );
+	_amplitude.resize( _probot->GetDOF() );
+	_phase0.resize(	  _probot->GetDOF() );
+	_offset.resize(	  _probot->GetDOF() );
 
-	std::cout << "[sinoscontroller] INIT" << endl;
+	std::cout << "[sinoscontroller] INIT" << std::endl;
 
 	Reset(0);
 
@@ -66,44 +66,44 @@ public:
 
     virtual void Reset(int options)
     {
-	samplingTics=0;
-	period=1;
-	N=20;
-	n=0;
-	phase=0;
-	cycleTime=0;
-	oscillating=false;
+	_samplingTics=0;
+	_period=1;
+	_N=20;
+	_n=0;
+	_phase=0;
+	_cycleTime=0;
+	_oscillating=false;
 
-	for (int i=0; i<robot->GetDOF(); i++) {
-	  ref_pos[i]=0;
-	  amplitude[i]=0;
-	  phase0[i]=0;
-	  offset[i]=0;
+	for (int i=0; i<_probot->GetDOF(); i++) {
+	  _ref_pos[i]=0;
+	  _amplitude[i]=0;
+	  _phase0[i]=0;
+	  _offset[i]=0;
 	}
 
 	SetRefPos();
 
-	std::cout << "[sinoscontroller] Reset!" << endl;
+	std::cout << "[sinoscontroller] Reset!" << std::endl;
     }
 
 
     virtual void SimulationStep(dReal fTimeElapsed)
     {
 	//-- Simulate the servos
-	servocontroller->SimulationStep(fTimeElapsed);
+	_pservocontroller->SimulationStep(fTimeElapsed);
 
 	//-- If the oscillating mode is not set, return
-	if (!oscillating)
+	if (!_oscillating)
 	    return;
 
-	samplingPeriod = round(period/(N*fTimeElapsed));
-	samplingTics++;
-	//cout << "Sampling tics: " << samplingTics << endl;
+	_samplingPeriod = round(_period/(_N*fTimeElapsed));
+	_samplingTics++;
+	//cout << "Sampling tics: " << _samplingTics << endl;
 
-	if ( samplingTics == samplingPeriod)
+	if ( _samplingTics == _samplingPeriod)
 	{
-	    samplingTics=0;
-	    n++;
+	    _samplingTics=0;
+	    _n++;
 
 	    //-- Calculate the next positions
 	    SetRefPos();
@@ -121,9 +121,9 @@ public:
 	//-- Set position command. The joint angles are received in degrees
 	if( cmd == "setamplitude" )
 	{
-	    for(size_t i = 0; i < amplitude.size(); ++i)
+	    for(size_t i = 0; i < _amplitude.size(); ++i)
 	    {
-		is >> amplitude[i];
+		is >> _amplitude[i];
 
 		if( !is )
 		    return false;
@@ -133,9 +133,9 @@ public:
 	}
 	else if ( cmd == "setinitialphase" )
 	{
-	    for(size_t i = 0; i < phase0.size(); ++i)
+	    for(size_t i = 0; i < _phase0.size(); ++i)
 	    {
-		is >> phase0[i];
+		is >> _phase0[i];
 
 		if( !is )
 		    return false;
@@ -145,9 +145,9 @@ public:
 	}
 	else if ( cmd == "setoffset" )
 	{
-	    for(size_t i = 0; i < offset.size(); ++i)
+	    for(size_t i = 0; i < _offset.size(); ++i)
 	    {
-		is >> offset[i];
+		is >> _offset[i];
 
 		if( !is )
 		    return false;
@@ -157,8 +157,8 @@ public:
 	}
 	else if ( cmd == "setperiod" )
 	{
-	    is >> period;
-	    samplingPeriod= period/N;
+	    is >> _period;
+	    _samplingPeriod= _period/_N;
 	    SetRefPos();
 	    return true;
 	}
@@ -167,9 +167,9 @@ public:
 	  is >> mode;
 
 	  if (mode=="on")
-	      oscillating=true;
+	      _oscillating=true;
 	  else
-	      oscillating=false;
+	      _oscillating=false;
 
 	  return true;
 	}
@@ -180,23 +180,23 @@ public:
 	  is >> file;
 
 	  is2 << "record_on " << file << " ";
-	  servocontroller->SendCommand(os2,is2);
+	  _pservocontroller->SendCommand(os2,is2);
 	}
 	else if ( cmd == "record_off" ) {
 	  stringstream os2, is2;
 
 	  is2 << "record_off ";
-	  servocontroller->SendCommand(os2,is2);
+	  _pservocontroller->SendCommand(os2,is2);
 	}
 	return true;
     }
 
     //-- Other functions:
-    virtual const std::vector<int>& GetControlDOFIndices() const { return dofIndices; }
-    virtual int IsControlTransformation() const { return nControlTransformation; }
+    virtual const std::vector<int>& GetControlDOFIndices() const { return _dofindices; }
+    virtual int IsControlTransformation() const { return _nControlTransformation; }
     virtual bool SetDesired(const std::vector<dReal>& values, TransformConstPtr trans) { return false; }
     virtual bool SetPath(TrajectoryBaseConstPtr ptraj) { Reset(0); return false; }
-    virtual RobotBasePtr GetRobot() const  {return robot;}
+    virtual RobotBasePtr GetRobot() const  {return _probot;}
     virtual bool IsDone()  { return false; }
     virtual dReal GetTime() const { return 0; }
 
@@ -209,40 +209,40 @@ private:
 	stringstream os, is;
 	is << "setpos ";
 
-	for (size_t i=0; i<ref_pos.size(); i++)
+	for (size_t i=0; i<_ref_pos.size(); i++)
 	{
-	  ref_pos[i]=amplitude[i]*sin(-(360.0*n)/(float)N *PI/180.0 + phase0[i]*PI/180) + offset[i];
-	  is<<ref_pos[i]<<" ";
+	  _ref_pos[i]=_amplitude[i]*sin(-(360.0*_n)/(float)_N *PI/180.0 + _phase0[i]*PI/180) + _offset[i];
+	  is<<_ref_pos[i]<<" ";
 	}
 
 	//-- Set the new servo reference positions
-	servocontroller->SendCommand(os,is);
+	_pservocontroller->SendCommand(os,is);
 
 	//-- Debug
-	//std::cout << "n=" << n << " Ref0: " << ref_pos[0] << " Ref1: " << ref_pos[1] << std::endl;
+	//std::cout << "n=" << _n << " Ref0: " << _ref_pos[0] << " Ref1: " << _ref_pos[1] << std::endl;
     }
 
 protected:
-    EnvironmentBasePtr env;
-    RobotBasePtr robot;
-    std::vector<int> dofIndices;
-    int nControlTransformation;
+    EnvironmentBasePtr _penv;
+    RobotBasePtr _probot;
+    std::vector<int> _dofindices;
+    int _nControlTransformation;
 
-    ControllerBasePtr servocontroller;
-    int samplingTics;
-    int samplingPeriod;
+    ControllerBasePtr _pservocontroller;
+    int _samplingTics;
+    int _samplingPeriod;
 
-    dReal cycleTime;
-    bool oscillating;        //-- State of the oscillator: oscillating true/false
-    int N;                   //-- Number of samples
-    int n;                   //-- Discrete time
-    dReal period;            //-- Oscilation period in seconds
-    dReal phase;
+    dReal _cycleTime;
+    bool _oscillating;        //-- State of the oscillator: oscillating true/false
+    int _N;                   //-- Number of samples
+    int _n;                   //-- Discrete time
+    dReal _period;            //-- Oscilation period in seconds
+    dReal _phase;
 
-    std::vector<dReal> ref_pos;   //-- Reference positions for the servos (in degrees)
-    std::vector<dReal> amplitude; //-- Oscillation amplitudes
-    std::vector<dReal> phase0;    //-- Oscillation initial phase
-    std::vector<dReal> offset;    //-- Oscillation offset
+    std::vector<dReal> _ref_pos;   //-- Reference positions for the servos (in degrees)
+    std::vector<dReal> _amplitude; //-- Oscillation amplitudes
+    std::vector<dReal> _phase0;    //-- Oscillation initial phase
+    std::vector<dReal> _offset;    //-- Oscillation offset
 };
 
 #endif

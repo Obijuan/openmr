@@ -48,7 +48,7 @@ public:
 	RegisterCommand("Record_on",boost::bind(&ServoController::RecordOn,this,_1,_2),"Format: Record_on file. Start recording the servo position in the specified file. It will generate an octave file ");
 	RegisterCommand("Record_off",boost::bind(&ServoController::RecordOff,this,_1,_2),"Format: Record_off. Stop recording. The octave file is generated ");
 
-	this->env = penv;
+	_penv = penv;
     }
 
 
@@ -56,25 +56,25 @@ public:
     
     virtual bool Init(RobotBasePtr robot, const std::vector<int>& dofindices, int nControlTransformation)
     {
-	this->robot = robot;
-	this->dofindices = dofindices;
-	this->nControlTransformation = nControlTransformation;
+	_probot = robot;
+	_dofindices = dofindices;
+	_nControlTransformation = nControlTransformation;
 
 	//-- Initialize odevelocity controller
-	velocitycontroller = RaveCreateController( env, "odevelocity");
-	velocitycontroller->Init( robot, dofindices, nControlTransformation );
+	_pvelocitycontroller = RaveCreateController( _penv, "odevelocity");
+	_pvelocitycontroller->Init( _probot, _dofindices, _nControlTransformation );
 
 	//-- Get the robot joints. Needed for obtaining the joint angles and maxvelocities.
 	std::vector<KinBodyPtr> bodies;
-	env->GetBodies( bodies );
-	joints = bodies[0]->GetJoints();
+	_penv->GetBodies( bodies );
+	_joints = bodies[0]->GetJoints();
 
 	//-- Recording Mode
 	//----------------------------------
-	recording = false;
+	_recording = false;
 
-	phi_tvec.resize( joints.size() );
-	ref_tvec.resize( joints.size() );
+	_phi_tvec.resize( _joints.size() );
+	_ref_tvec.resize( _joints.size() );
 
 	std::cout << "[servocontroller] INIT" << std::endl;
 
@@ -87,18 +87,18 @@ public:
     {
 	//-- Initially, the reference positions should be set to the joints position
 	//-- in order for the servos to stay in the initial position
-	ref_pos.resize( robot->GetDOF());
+	_ref_pos.resize( _probot->GetDOF());
 
 	std::vector<dReal> angle;
 
-	for (size_t i=0; i< joints.size(); i++)
+	for (size_t i=0; i< _joints.size(); i++)
 	{
-	    joints[i]->GetValues(angle);
-	    ref_pos[i]=angle[0];
+	    _joints[i]->GetValues(angle);
+	    _ref_pos[i]=angle[0];
 	}
 
 	//-- Default value of the Proportional controller KP constant
-	KP=8.3;
+	_KP=8.3;
     }
 
 
@@ -106,8 +106,8 @@ public:
     virtual void SimulationStep(dReal fElapsedTime)
     {
 	std::vector<dReal> angles;
-	std::vector<dReal> error( robot->GetDOF() );
-	std::vector<dReal> velocity( robot->GetDOF() );
+	std::vector<dReal> error( _probot->GetDOF() );
+	std::vector<dReal> velocity( _probot->GetDOF() );
 
 	stringstream is;
 	stringstream os;
@@ -115,18 +115,18 @@ public:
 	is << "setvelocity ";
 
 	//-- K controller for each joint
-	for (size_t i=0; i<joints.size(); i++)
+	for (size_t i=0; i<_joints.size(); i++)
 	{
 	    //-- Get current joint angles
-	    joints[i]->GetValues(angles);
+	    _joints[i]->GetValues(angles);
 
 	    //-- Calculate the distance to the reference position (error)
 	    //-- and the desired velocity
-	    error[i] = ref_pos[i] - angles[0];
-	    velocity[i] = error[i] * KP;
+	    error[i] = _ref_pos[i] - angles[0];
+	    velocity[i] = error[i] * _KP;
 
 	    //-- Limit the velocity to its maximum
-	    dReal Maxvel = joints[i]->GetMaxVel();
+	    dReal Maxvel = _joints[i]->GetMaxVel();
 
 	    if (velocity[i] > Maxvel)
 		velocity[i] = Maxvel;
@@ -137,15 +137,15 @@ public:
 	    is << velocity[i] << " ";
 
 	    //-- In recording mode, store the current sample
-	    if (recording)
+	    if (_recording)
 	    {
-		phi_tvec[i].push_back(angles[0]);
-		ref_tvec[i].push_back(ref_pos[i]);
+		_phi_tvec[i].push_back(angles[0]);
+		_ref_tvec[i].push_back(_ref_pos[i]);
 	    }
 	}
 
 	//-- Set the joints velocities
-	velocitycontroller->SendCommand(os,is);
+	_pvelocitycontroller->SendCommand(os,is);
 
     }
 
@@ -168,7 +168,7 @@ public:
 
     bool SetPos( std::ostream& os, std::istream& is)
     {
-	for (size_t i = 0; i < ref_pos.size(); i++)
+	for (size_t i = 0; i < _ref_pos.size(); i++)
 	{
 	    dReal pos;
 	    is >> pos;
@@ -177,7 +177,7 @@ public:
 		return false;
 
 	    //-- Store the reference positions (in radians)
-	    ref_pos[i]=pos*PI/180;
+	    _ref_pos[i]=pos*PI/180;
 	}
 	return true;
     }
@@ -200,11 +200,11 @@ public:
 	is >> angle;
 
 	//-- Prevent invalid values
-	if (servoIndex < 0 || servoIndex >= (int) ref_pos.size() )
+	if (servoIndex < 0 || servoIndex >= (int) _ref_pos.size() )
 	    return false;
 
 	//-- Store the reference positions in radians
-	ref_pos[servoIndex]=angle*PI/180;
+	_ref_pos[servoIndex]=angle*PI/180;
 
 	return true;
     }
@@ -220,10 +220,10 @@ public:
     {
       std::vector<dReal> anglesRad; //-- Angle in radians
 
-      for(size_t i = 0; i < ref_pos.size(); ++i)
+      for(size_t i = 0; i < _ref_pos.size(); ++i)
       {
 	//-- Get the angles of the ith joint in radians
-	joints[i]->GetValues(anglesRad);
+	_joints[i]->GetValues(anglesRad);
 
 	//-- Convert it to degrees and output it
 	os << anglesRad[0]*180/PI << " ";
@@ -250,10 +250,10 @@ public:
 	is >> servoIndex;
 
 	//-- Check if index is valid:
-	if ( servoIndex > 0 && servoIndex < (int) joints.size() )
+	if ( servoIndex > 0 && servoIndex < (int) _joints.size() )
 	{
 	    //-- Get the current joint angle
-	    joints[servoIndex]->GetValues(anglesRad);
+	    _joints[servoIndex]->GetValues(anglesRad);
 
 	    //-- Convert it to degrees and output it
 	    os << anglesRad[0]*180/PI << " ";
@@ -279,7 +279,7 @@ public:
 	std::string fileName;
 
 	//-- Check current status:
-	if ( !recording )
+	if ( !_recording )
 	{
 	    if ( is )
 	    {
@@ -290,14 +290,14 @@ public:
 		outScriptFilePath = fileName + ".m";
 
 		//-- Resize the data vectors
-		for (size_t i=0; i<joints.size(); i++)
+		for (size_t i=0; i<_joints.size(); i++)
 		{
-		  phi_tvec[i].resize(0);
-		  ref_tvec[i].resize(0);
+		  _phi_tvec[i].resize(0);
+		  _ref_tvec[i].resize(0);
 		}
 
 		//-- Setting the recording mode on
-		recording=true;
+		_recording=true;
 
 		std::cout << "[servocontroller] RECORDING on: \"" << outDataFilePath << "\"\n";
 
@@ -320,14 +320,14 @@ public:
     bool RecordOff(std::ostream& os, std::istream& is)
     {
 
-	if (recording)
+	if (_recording)
 	{
 	    //-- Open the files:
 	    ofstream outDataFile( outDataFilePath.c_str() );
 	    ofstream outScriptFile( outScriptFilePath.c_str());
 
 	    //-- Restore state
-	    recording=false;
+	    _recording=false;
 
 	    if ( outDataFile.is_open() && outScriptFile.is_open() )
 	    {
@@ -340,7 +340,7 @@ public:
 		outScriptFile.close();
 
 		std::cout << "[servocontroller] RECORDING off" << std::endl;
-		std::cout << "[servocontroller] Max vel: " << joints[0]->GetMaxVel() << std::endl;
+		std::cout << "[servocontroller] Max vel: " << _joints[0]->GetMaxVel() << std::endl;
 		return true;
 	    }
 	    else
@@ -349,7 +349,7 @@ public:
 		std::cerr << "[servocontroller] Error opening the output file." << std::endl;
 
 		std::cout << "[servocontroller] RECORD off" << std::endl;
-		std::cout << "[servocontroller] Max vel: " << joints[0]->GetMaxVel() << std::endl;
+		std::cout << "[servocontroller] Max vel: " << _joints[0]->GetMaxVel() << std::endl;
 		return false;
 	    }
 	}
@@ -359,11 +359,11 @@ public:
 
 
     //-- Other functions:
-    virtual const std::vector<int>& GetControlDOFIndices() const { return dofindices; }
-    virtual int IsControlTransformation() const { return nControlTransformation; }
+    virtual const std::vector<int>& GetControlDOFIndices() const { return _dofindices; }
+    virtual int IsControlTransformation() const { return _nControlTransformation; }
     virtual bool SetDesired(const std::vector<dReal>& values, TransformConstPtr trans) { return false; }
     virtual bool SetPath(TrajectoryBaseConstPtr ptraj) { Reset(0); return false; }
-    virtual RobotBasePtr GetRobot() const  {return robot;}
+    virtual RobotBasePtr GetRobot() const  {return _probot;}
     virtual bool IsDone()  { return false; }
     virtual dReal GetTime() const { return 0; }
 
@@ -379,15 +379,15 @@ private:
 	//-- Each row is a servo, each column is a sample
 	outFile << "# name: phi" << std::endl;
 	outFile << "# type: matrix" << std::endl;
-	outFile << "# rows: " << phi_tvec.size() << std::endl;
-	outFile << "# columns: " << phi_tvec[0].size() << std::endl;
+	outFile << "# rows: " << _phi_tvec.size() << std::endl;
+	outFile << "# columns: " << _phi_tvec[0].size() << std::endl;
 
-	for (size_t i =0; i < phi_tvec.size(); i++)
+	for (size_t i =0; i < _phi_tvec.size(); i++)
 	{
-	    for ( size_t j = 0; j < phi_tvec[0].size() ; j ++)
+	    for ( size_t j = 0; j < _phi_tvec[0].size() ; j ++)
 	    {
 		//-- Save the angles in degrees
-		outFile << phi_tvec[i][j]*180/PI << " ";
+		outFile << _phi_tvec[i][j]*180/PI << " ";
 	    }
 
 	    outFile << std::endl;
@@ -397,15 +397,15 @@ private:
 	//-- Each row is a servo, each column is a sample
 	outFile << "# name: ref" << std::endl;
 	outFile << "# type: matrix" << std::endl;
-	outFile << "# rows: " << ref_tvec.size() << std::endl;
-	outFile << "# columns: " << ref_tvec[0].size() << std::endl;
+	outFile << "# rows: " << _ref_tvec.size() << std::endl;
+	outFile << "# columns: " << _ref_tvec[0].size() << std::endl;
 
-	for (size_t i =0; i < ref_tvec.size(); i++)
+	for (size_t i =0; i < _ref_tvec.size(); i++)
 	{
-	    for ( size_t j = 0; j < ref_tvec[0].size() ; j ++)
+	    for ( size_t j = 0; j < _ref_tvec[0].size() ; j ++)
 	    {
 		//-- Save the angles in degrees
-		outFile << ref_tvec[i][j]*180/PI << " ";
+		outFile << _ref_tvec[i][j]*180/PI << " ";
 	    }
 
 	    outFile << std::endl;
@@ -415,9 +415,9 @@ private:
 	outFile << "# name: time" << std::endl;
 	outFile << "# type: matrix" << std::endl;
 	outFile << "# rows: 1" << std::endl;
-	outFile << "# columns: " << phi_tvec[0].size() << std::endl;
+	outFile << "# columns: " << _phi_tvec[0].size() << std::endl;
 
-	for( size_t i = 0; i < phi_tvec[0].size(); i++)
+	for( size_t i = 0; i < _phi_tvec[0].size(); i++)
 	    outFile << i << " ";
 
     }
@@ -438,12 +438,12 @@ private:
 	//-- Plot the actual positions of the servos
 	outFile <<  "# Plot servo actual angles" << std::endl;
 	outFile << "plot(";
-	for (size_t i=0; i<phi_tvec.size(); i++)
+	for (size_t i=0; i<_phi_tvec.size(); i++)
 	{
 	    outFile << "time,phi(" << i+1 << ",:), '-'";
 
 	    //-- Add a ',' except for the last element
-	    if (i<phi_tvec.size()-1)
+	    if (i<_phi_tvec.size()-1)
 		outFile << ",";
 	}
 	outFile << ");" << std::endl << endl;
@@ -453,12 +453,12 @@ private:
 	outFile << "hold on;";
 	outFile << "plot(";
 
-	for (size_t i=0; i<ref_tvec.size(); i++)
+	for (size_t i=0; i<_ref_tvec.size(); i++)
 	{
 	    outFile << "time,ref(" << i+1 << ",:),'-'";
 
 	    //-- Add a ',' except for the last element
-	    if (i<ref_tvec.size()-1)
+	    if (i<_ref_tvec.size()-1)
 		outFile << ",";
 	}
 
@@ -469,12 +469,12 @@ private:
 	outFile << "# The following lines make the graph look nice" << std::endl;
 	outFile << "legend(";
 
-	for (size_t s=0; s<phi_tvec.size(); s++)
+	for (size_t s=0; s<_phi_tvec.size(); s++)
 	{
 	    outFile << "'Servo " << s+1 << "'";
 
 	    //-- Add a ',' except for the last element
-	    if (s<phi_tvec.size()-1)
+	    if (s<_phi_tvec.size()-1)
 		outFile << ",";
 	}
 	outFile << ");" << std::endl;
@@ -484,7 +484,7 @@ private:
 	outFile << "title('Servo angles')" << endl;
 	outFile << "xlabel('Simulation time')" << endl;
 	outFile << "ylabel('Angle (degrees)')" << endl;
-	outFile << "axis([0," << phi_tvec[0].size()-1 << ",-90, 90])" << endl;
+	outFile << "axis([0," << _phi_tvec[0].size()-1 << ",-90, 90])" << endl;
 	outFile << "pause;" << endl;
     }
 
@@ -496,30 +496,30 @@ private:
     {
 
 	//-- Size of the sample population
-	size_t size = phi_tvec[0].size();
+	size_t size = _phi_tvec[0].size();
 	std::cout << "[servocontroller] Size: " << size << std::endl;
 
 	//-- Servos angle
-	for (size_t s=0; s<phi_tvec.size(); s++)
+	for (size_t s=0; s<_phi_tvec.size(); s++)
 	{
 	    outFile << "phi" << s <<"=[";
 
 	    for (size_t t=0; t<size; t++)
 	    {
-		outFile << phi_tvec[s][t]*180/PI << ",";
+		outFile << _phi_tvec[s][t]*180/PI << ",";
 	    }
 
 	    outFile << "];" << endl;
 	}
 
 	//-- Reference positions
-	for (size_t s=0; s<ref_tvec.size(); s++)
+	for (size_t s=0; s<_ref_tvec.size(); s++)
 	{
 	    outFile << "ref" << s <<"=[";
 
 	    for (size_t t=0; t<size; t++)
 	    {
-		outFile << ref_tvec[s][t]*180/PI << ",";
+		outFile << _ref_tvec[s][t]*180/PI << ",";
 	    }
 
 	    outFile << "];" << endl;
@@ -531,12 +531,12 @@ private:
 
 	//-- Plot the servo angles
 	outFile << "plot(";
-	for (size_t s=0; s<phi_tvec.size(); s++)
+	for (size_t s=0; s<_phi_tvec.size(); s++)
 	{
 	    outFile << "t,phi" << s << ",'-'";
 
 	    //-- Add a ',' except for the last element
-	    if (s<phi_tvec.size()-1)
+	    if (s<_phi_tvec.size()-1)
 		outFile << ",";
 	}
 	outFile << ");" << endl;
@@ -545,12 +545,12 @@ private:
 	outFile << "hold on;";
 	outFile << "plot(";
 
-	for (size_t s=0; s<ref_tvec.size(); s++)
+	for (size_t s=0; s<_ref_tvec.size(); s++)
 	{
 	    outFile << "t,ref" << s << ",'-'";
 
 	    //-- Add a ',' except for the last element
-	    if (s<ref_tvec.size()-1)
+	    if (s<_ref_tvec.size()-1)
 		outFile << ",";
 	}
 
@@ -560,12 +560,12 @@ private:
 	//-- Add the legends
 	outFile << "legend(";
 
-	for (size_t s=0; s<phi_tvec.size(); s++)
+	for (size_t s=0; s<_phi_tvec.size(); s++)
 	{
 	    outFile << "'Servo " << s << "'";
 
 	    //-- Add a ',' except for the last element
-	    if (s<phi_tvec.size()-1)
+	    if (s<_phi_tvec.size()-1)
 		outFile << ",";
 	}
 	outFile << ");" << std::endl;
@@ -580,22 +580,22 @@ private:
     }
 
 protected:
-    EnvironmentBasePtr env;
-    RobotBasePtr robot;
-    std::vector<int> dofindices;
-    int nControlTransformation;
+    EnvironmentBasePtr _penv;
+    RobotBasePtr _probot;
+    std::vector<int> _dofindices;
+    int _nControlTransformation;
 
-    ControllerBasePtr velocitycontroller;
-    std::vector<KinBody::JointPtr> joints;
-    std::vector<dReal> ref_pos;		//-- Reference positions (in radians)
-    dReal KP;				//-- P controller KP constant
+    ControllerBasePtr _pvelocitycontroller;
+    std::vector<KinBody::JointPtr> _joints;
+    std::vector<dReal> _ref_pos;		//-- Reference positions (in radians)
+    dReal _KP;				//-- P controller KP constant
 
     //-- For recording...
     std::string outDataFilePath;         //-- Path to the file for storing the servo positions
     std::string outScriptFilePath;	 //-- Path to the script for printing the beautiful graphs
-    bool recording;			 //-- Recording mode state
-    std::vector<tvector> phi_tvec;	 //-- Temporary storage for the servo's angles in time
-    std::vector<tvector> ref_tvec;       //-- Temporary storage for the servo's reference positions in time
+    bool _recording;			 //-- Recording mode state
+    std::vector<tvector> _phi_tvec;	 //-- Temporary storage for the servo's angles in time
+    std::vector<tvector> _ref_tvec;       //-- Temporary storage for the servo's reference positions in time
 
 };
 
