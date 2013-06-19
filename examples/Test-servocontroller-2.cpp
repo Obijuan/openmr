@@ -2,11 +2,12 @@
 /* Test-servocontroller2                                                  */
 /*------------------------------------------------------------------------*/
 /* (c) Juan Gonzalez. July-2010                                           */
+/* Updated by David Estevez-Fernandez, 2013                               */
 /*------------------------------------------------------------------------*/
 /* GPL license                                                            */
 /*------------------------------------------------------------------------*/
 /* Testing the Servocontroller.                                           */
-/* This example set the position of the servos 0 and 1 to 45 and -45      */
+/* This example sets the position of the servos 0 and 1 to 45 and -45      */
 /* alternately                                                            */
 /**************************************************************************/
 
@@ -22,6 +23,11 @@ class Example : public TestBase
 
 void Example::run(dReal step, bool realtime)
 {
+
+  char key;
+  std::cout << "Press a key to start the simulation" << std::endl;
+  std::cin.get(key);
+
   penv->StartSimulation(step, realtime);
   stringstream is, os;
 
@@ -32,7 +38,7 @@ void Example::run(dReal step, bool realtime)
     //-- of the two servos is given: Servo 0 to 45 and servo 1 to -45
     is << "setpos 45 -45 ";
     pcontroller->SendCommand(os,is);
-
+    cout << "works ok";
     //-- Wait one second
     sleep(1);
 
@@ -60,11 +66,19 @@ void Example::run(dReal step, bool realtime)
 
 }
 
-int main(void)
+int main(int argc, char ** argv)
 {
+    std::string envfile;
 
-  Example example("models/Unimod2.env.xml","servocontroller");
-  example.SetCamera(-0.256, -0.194, 0.54, 0.778, -0.155, 0.23, 0.119);
+    if (argc==1)
+      //-- Default file
+      envfile="./models/Unimod2.env.xml";
+    else
+      envfile = argv[1];
+
+  Example example(envfile, "servocontroller");
+
+  //example.SetCamera(-0.256, -0.194, 0.54, 0.778, -0.155, 0.23, 0.119);
   example.run(0.005);
 
   return 0;

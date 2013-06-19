@@ -200,7 +200,7 @@ public:
 	is >> angle;
 
 	//-- Prevent invalid values
-	if (servoIndex < 0 || servoIndex >= ref_pos.size() )
+	if (servoIndex < 0 || servoIndex >= (int) ref_pos.size() )
 	    return false;
 
 	//-- Store the reference positions in radians
@@ -250,7 +250,7 @@ public:
 	is >> servoIndex;
 
 	//-- Check if index is valid:
-	if ( servoIndex > 0 && servoIndex < joints.size() )
+	if ( servoIndex > 0 && servoIndex < (int) joints.size() )
 	{
 	    //-- Get the current joint angle
 	    joints[servoIndex]->GetValues(anglesRad);

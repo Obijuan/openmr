@@ -1,12 +1,13 @@
 /*------------------------------------------------------------------------*/
 /* Test-servocontroller1                                                  */
 /*------------------------------------------------------------------------*/
-/* (c) Juan Gonzalez. July-2010                                           */
+/* (c) Juan Gonzalez. July-2010						  */
+/* Updated by David Estevez-Fernandez, 2013                               */
 /*------------------------------------------------------------------------*/
 /* GPL license                                                            */
 /*------------------------------------------------------------------------*/
 /* Testing the Servocontroller.                                           */
-/* This example set the servo position to 45 and -45 every second         */
+/* This example sets the servo position to 45 and -45 every second         */
 /**************************************************************************/
 
 #include "TestBase.h"
@@ -21,6 +22,10 @@ class Example : public TestBase
 
 void Example::run(dReal step, bool realtime)
 {
+    char key;
+    std::cout << "Press a key to start the simulation" << std::endl;
+    std::cin.get(key);
+
     penv->StartSimulation(step, realtime);
 
     stringstream is,os;
@@ -47,10 +52,17 @@ void Example::run(dReal step, bool realtime)
 
 }
 
-int main(void)
+int main(int argc, char ** argv)
 {
+    std::string envfile;
 
-  Example example("models/Unimod1.env.xml","servocontroller");
+    if (argc==1)
+      //-- Default file
+      envfile="./models/Unimod1.env.xml";
+    else
+      envfile = argv[1];
+
+  Example example(envfile, "servocontroller");
   example.run(0.002);
 
   return 0;

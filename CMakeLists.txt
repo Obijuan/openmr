@@ -7,7 +7,6 @@ if( CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX )
 endif( CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX )
 
 find_package(Boost ${OpenRAVE_Boost_VERSION} EXACT COMPONENTS iostreams python thread)
-add_subdirectory(plugin)
 
-project (openrave-modular-robots-examples)
+add_subdirectory(plugin)
 add_subdirectory(examples)

@@ -21,12 +21,18 @@ endif()
 link_directories(${OpenRAVE_LIBRARY_DIRS} ${Boost_LIBRARY_DIRS})
 
 
+# Compile TestBase as static library:
+add_library( TESTBASE TestBase.cpp)
+set_target_properties( TESTBASE PROPERTIES COMPILE_FLAGS "${OPENRAVE_CXXFLAGS}")
+set_target_properties( TESTBASE PROPERTIES LINK_FLAGS "${OPENRAVE_LINK_FLAGS}")
+target_link_libraries( TESTBASE ${OpenRAVE_LIBRARIES} ${OpenRAVE_CORE_LIBRARIES} ${Boost_THREAD_LIBRARY})
+
 # Macro for compiling the examples
 macro( build_openmr_example name)
-	add_executable( ${name} ${name}.cpp TestBase.cpp)
+	add_executable( ${name} ${name}.cpp)
 	set_target_properties(${name} PROPERTIES COMPILE_FLAGS "${OPENRAVE_CXXFLAGS}")
 	set_target_properties(${name} PROPERTIES LINK_FLAGS "${OPENRAVE_LINK_FLAGS}")
-	target_link_libraries(${name} ${OpenRAVE_LIBRARIES} ${OpenRAVE_CORE_LIBRARIES})
+	target_link_libraries(${name} ${OpenRAVE_LIBRARIES} ${OpenRAVE_CORE_LIBRARIES} ${Boost_THREAD_LIBRARY} TESTBASE)
 endmacro( build_openmr_example)
 
 
@@ -47,7 +53,7 @@ build_openmr_example( Cube3-I )
 build_openmr_example( Cube4-I )
 build_openmr_example( Cube5-I )
 build_openmr_example( Minicube-II-1 )
-build_openmr_example( snake )
-build_openmr_example( test )
+build_openmr_example( Snake5-I )
+build_openmr_example( Test-plotting )
 
 
