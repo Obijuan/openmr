@@ -58,7 +58,7 @@ int main(int argc, char ** argv)
 
     if (argc==1)
       //-- Default file
-      envfile="./models/Unimod1.env.xml";
+      envfile="../models/Unimod1.env.xml";
     else
       envfile = argv[1];
 

@@ -105,7 +105,7 @@ void TestBase::SetViewer()
   penv->Add(viewer);
 
   //-- Set the camera
-  SetCamera(0.427, 0.285, 0.47, 0.718, 0.338, 0.18, 0.166);
+  //SetCamera(0.427, 0.285, 0.47, 0.718, 0.338, 0.18, 0.166);
 
   // finally you call the viewer's infinite loop
   // (this is why you need a separate thread):

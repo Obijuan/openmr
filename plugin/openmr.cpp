@@ -23,23 +23,6 @@
 
 using namespace OpenRAVE;
 
-class openMR : public ModuleBase
-{
-public:
-    openMR(EnvironmentBasePtr penv, std::istream& ss) : ModuleBase(penv) {
-	RegisterCommand("HelloWorld",boost::bind(&openMR::HelloWorld,this,_1,_2),
-			"This is the basic example");
-    }
-    virtual ~openMR() {}
-
-    bool HelloWorld(std::ostream& sout, std::istream& sinput)
-    {
-	std::string input;
-	sinput >> input;
-	sout << "Hello World\n";
-	return true;
-    }
-};
 
 // called to create a new plugin
 InterfaceBasePtr CreateInterfaceValidated(InterfaceType type, const std::string& interfacename, std::istream& sinput, EnvironmentBasePtr penv)
@@ -52,17 +35,12 @@ InterfaceBasePtr CreateInterfaceValidated(InterfaceType type, const std::string&
 	return InterfaceBasePtr( new SinosController( penv, sinput));
     }
 
-    if( type == PT_Module && interfacename == "openMR" ) {
-	return InterfaceBasePtr(new openMR(penv,sinput));
-    }
-
     return InterfaceBasePtr();
 }
 
 // called to query available plugins
 void GetPluginAttributesValidated(PLUGININFO& info)
 {
-info.interfacenames[PT_Module].push_back("openMR");
 info.interfacenames[PT_Controller].push_back("servocontroller");
 info.interfacenames[PT_Controller].push_back("sinoscontroller");
 

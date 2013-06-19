@@ -39,7 +39,7 @@ def run():
     try:
         file_env = sys.argv[1]
     except IndexError:
-        file_env = 'models/Unimod2.env.xml'
+        file_env = '../models/Unimod2.env.xml'
 
     env = Environment()
     env.Load(file_env)

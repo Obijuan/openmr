@@ -95,7 +95,7 @@ int main(int argc, char ** argv)
 
   if (argc==1)
     //-- Default file
-    envfile="./models/Minicube-II.env.xml";
+    envfile="../models/Minicube-II.env.xml";
   else
     envfile = argv[1];
 

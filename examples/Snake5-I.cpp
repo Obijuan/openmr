@@ -55,7 +55,7 @@ int main(int argc, char ** argv)
 
   if (argc==1)
     //-- Default file
-    envfile="./models/snake.env.xml";
+    envfile="../models/snake.env.xml";
   else
     envfile = argv[1];
 

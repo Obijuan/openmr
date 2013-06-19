@@ -62,7 +62,7 @@ int main(int argc, char ** argv)
 
   if (argc==1)
     //-- Default file
-    envfile="./models/Cube5-I.env.xml";
+    envfile="../models/Cube5-I.env.xml";
   else
     envfile = argv[1];
 
