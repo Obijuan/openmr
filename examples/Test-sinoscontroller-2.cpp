@@ -1,3 +1,14 @@
+/*------------------------------------------------------------------------*/
+/* Test-sinoscontroller-2						  */
+/*------------------------------------------------------------------------*/
+/* (c) Juan Gonzalez. July-2010						  */
+/* Updated by David Estevez-Fernandez, 2013                               */
+/*------------------------------------------------------------------------*/
+/* GPL license                                                            */
+/*------------------------------------------------------------------------*/
+/* Testing the Sinoscontroller.                                           */
+/**************************************************************************/
+
 #include "TestBase.h"
 
 class Example : public TestBase
@@ -10,6 +21,11 @@ class Example : public TestBase
 
 void Example::run(dReal step, bool realtime)
 {
+
+    char key;
+    std::cout << "Press a key to start the simulation" << std::endl;
+    std::cin.get(key);
+
     penv->StartSimulation(step, realtime);
 
     stringstream os,is;
@@ -29,7 +45,7 @@ void Example::run(dReal step, bool realtime)
     pcontroller->SendCommand(os,is);
 
     //-- Start recording the servo's angle
-    is << "record_on test2.m ";
+    is << "record_on test2 ";
     pcontroller->SendCommand(os,is);
 
     const dReal STEP = 0.005;
@@ -39,19 +55,26 @@ void Example::run(dReal step, bool realtime)
     is << "record_off ";
     pcontroller->SendCommand(os,is);
 
-    cout << "FIN\n";
+    cout << "END. Press cntrl-C to exit...\n";
     
 }
 
-int main(void)
+int main(int argc, char ** argv)
 {
+    std::string envfile;
 
-  Example example("models/Unimod1.env.xml","sinoscontroller");
-  usleep(100000);
-  example.SetCamera(0.36697, 0.167263, 0.434483, 0.805345,0.290932, 0.285499, 0.233995);
-  example.run(0.005);
+    if (argc==1)
+	//-- Default file
+	envfile="../models/Unimod1.env.xml";
+    else
+	envfile = argv[1];
 
-  return 0; 
+    Example example( envfile ,"sinoscontroller");
+    usleep(100000);
+    //example.SetCamera(0.36697, 0.167263, 0.434483, 0.805345,0.290932, 0.285499, 0.233995);
+    example.run(0.005);
+
+    return 0;
 }
 
 

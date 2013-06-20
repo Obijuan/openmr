@@ -2,6 +2,7 @@
 /* Test-servocontroller3                                                  */
 /*------------------------------------------------------------------------*/
 /* (c) Juan Gonzalez. July-2010                                           */
+/* Updated by David Estevez-Fernandez, 2013                               */
 /*------------------------------------------------------------------------*/
 /* GPL license                                                            */
 /*------------------------------------------------------------------------*/
@@ -21,6 +22,11 @@ class Example : public TestBase
 
 void Example::run(dReal step, bool realtime)
 {
+
+  char key;
+  std::cout << "Press a key to start the simulation" << std::endl;
+  std::cin.get(key);
+
   penv->StartSimulation(step, realtime);
   stringstream is, os;
 
@@ -30,7 +36,7 @@ void Example::run(dReal step, bool realtime)
   sleep(1);
 
   //-- Start recording the servo's angle
-  is << "record_on test1.m ";
+  is << "record_on test1 ";
   pcontroller->SendCommand(os,is);
   usleep(100000);
 
@@ -41,14 +47,21 @@ void Example::run(dReal step, bool realtime)
   is << "record_off ";
   pcontroller->SendCommand(os,is);
 
-  cout << "FIN\n";
+  cout << "END. Press cntrl+C to exit...\n";
 
 }
 
-int main(void)
+int main(int argc, char ** argv)
 {
+    std::string envfile;
 
-  Example example("models/Unimod2.env.xml","servocontroller");
+    if (argc==1)
+      //-- Default file
+      envfile="../models/Unimod2.env.xml";
+    else
+      envfile = argv[1];
+
+  Example example(envfile, "servocontroller");
   example.run(0.005);
 
   return 0;

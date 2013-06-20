@@ -12,8 +12,7 @@
 #// You should have received a copy of the GNU Lesser General Public License
 #// along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import with_statement # for python 2.5
-__author__ = 'Juan Gonzalez'
+__author__ = 'Juan Gonzalez, David Estevez'
 __copyright__ = 'Copyright (C) 2010 Juan Gonzalez (juan@iearobotics.com)'
 __license__ = 'GPLv3 license'
 
@@ -40,7 +39,7 @@ def run():
     try:
         file_env = sys.argv[1]
     except IndexError:
-        file_env = 'models/Unimod2.env.xml'
+        file_env = '../models/Unimod2.env.xml'
 
     env = Environment()
     env.Load(file_env)
@@ -53,12 +52,12 @@ def run():
     #-- Translation
     T=trans(T,0.412915, 0.156822, 0.285362)
 
-    env.SetCamera(T)
+    #env.GetViewer().SetCamera(T)
 
     #-- Set the robot controller and start the simulation
     with env:
         robot = env.GetRobots()[0]
-        robot.SetController(env.CreateController('servocontroller'))
+        robot.SetController(RaveCreateController(env, 'servocontroller'))
         env.StopSimulation()
         env.StartSimulation(timestep=0.001)
 

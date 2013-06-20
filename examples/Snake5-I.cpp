@@ -16,11 +16,10 @@
 
 
 //----------------------------------------------------------------------------
-//-- This example loads a 3-module worm robot and makes it walk
+//-- This example loads a 5-module snake robot and sets every module at 50º
 //----------------------------------------------------------------------------
 
 
-#include <iostream>
 #include "TestBase.h"
 
 class Example : public TestBase
@@ -34,19 +33,11 @@ class Example : public TestBase
 void Example::run(dReal step, bool realtime)
 {
   stringstream os,is;
-  is << "setamplitude 60 60 60 ";
+
+  is << "setperiod 2 ";
   pcontroller->SendCommand(os,is);
 
-  is << "setinitialphase 0 120 240 ";
-  pcontroller->SendCommand(os,is);
-
-  is << "setoffset 0 0 0 ";
-  pcontroller->SendCommand(os,is);
-
-  is << "setperiod 3 ";
-  pcontroller->SendCommand(os,is);
-
-  is << "oscillation on ";
+  is << "setoffset 50 50 50 50 50 50 50 50 50 ";
   pcontroller->SendCommand(os,is);
 
   char key;
@@ -64,14 +55,14 @@ int main(int argc, char ** argv)
 
   if (argc==1)
     //-- Default file
-    envfile="../models/Cube3-I.env.xml";
+    envfile="../models/snake.env.xml";
   else
     envfile = argv[1];
 
   Example example(envfile,"sinoscontroller");
   usleep(100000);
-  //example.SetCamera(0.427, 0.285, 0.47, 0.718, 0.59, 0.078, 0.263);
-  example.run(0.001,false);
+  example.SetCamera(0.427, 0.285, 0.47, 0.718, 0.59, 0.078, 0.263);
+  example.run(0.005,true);
 
   return 0;
 }

@@ -1,3 +1,25 @@
+// Copyright (C) 2010 Juan Gonzalez (juan@iearobotics.com)
+// Updated by David Estevez-Fernandez, 2013
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+
+//----------------------------------------------------------------------------
+//-- This example loadsthe 2-module simplest worm robot and makes it walk
+//----------------------------------------------------------------------------
+
+
 #include "TestBase.h"
 
 class Example : public TestBase
@@ -26,6 +48,10 @@ void Example::run(dReal step, bool realtime)
   is << "oscillation on ";
   pcontroller->SendCommand(os,is);
 
+  char key;
+  std::cout << "Press a key to start the simulation" << std::endl;
+  std::cin.get(key);
+
   penv->StartSimulation(step, realtime);
 
   while(1) {
@@ -41,7 +67,7 @@ int main(int argc, char ** argv)
 
   if (argc==1)
     //-- Default file
-    envfile="./models/Minicube-I.env.xml";
+    envfile="../models/Minicube-I.env.xml";
   else
     envfile = argv[1];
 
