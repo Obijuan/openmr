@@ -1,0 +1,3 @@
+  <Robot name="REPY-2.0">
+	<KinBody file="REPY-2.0.kinbody.xml"></KinBody>
+  </Robot>
